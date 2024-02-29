@@ -1,17 +1,18 @@
 import { useState, useEffect, HTMLAttributes } from 'react';
-import { QuestionConteinerProps } from '../../../models/interfase';
+import { IQuestionConteinerProps } from '../../../models/interfase';
+import { THandlerClick } from '../../../models/type';
 import './QuestionContainer.scss';
 import { sortQuestions } from '../../../backend/lib/data.js';
 
 
 
-export default function QuestionContainer (props: QuestionConteinerProps) {
+export default function QuestionContainer (props: IQuestionConteinerProps) {
     const {skill, type} = props;
 
     const [visible, setVisible] = useState ('')
     const [questions, setQuestions] = useState([])
     
-    const handlerClick = (key: string): void => {
+    const handlerClick: THandlerClick = (key) => {
         setVisible(key);
     }
     useEffect(() => {

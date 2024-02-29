@@ -1,29 +1,29 @@
 import './Menu.scss';
-import { MenuProps } from '../../../models/interfase';
+import { IMenuProps } from '../../../models/interfase';
+import { THandleClick, TSubmenuClicked } from '../../../models/type';
 import Button from "../Button/Button";
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 
 
 
 
-export default function Menu (props: MenuProps) {
+export default function Menu (props: IMenuProps) {
     const {onAddQuestion, onClick, onSkillQuestion} = props;
 
     const [active, setActive] = useState('junior')
     const [submenuAct, setSubmenuAct] = useState('questions') 
 
-    function handleClick (type) {
+    const handleClick: THandleClick = useCallback((type) => {
         setActive(type);
         setSubmenuAct('questions');
-        onSkillQuestion(type);
-        
-    }
+        onSkillQuestion(type);  
+    }, [])
   
-    const submenuClicked = (type) => {
+    const submenuClicked: TSubmenuClicked = useCallback((type) => {
         setSubmenuAct(type);
         onClick(type);
-        }
+        }, [])
     
 
     

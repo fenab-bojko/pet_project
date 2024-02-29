@@ -1,8 +1,8 @@
 import {ButtonHTMLAttributes} from 'react';
-import { ButtonProps } from '../../../models/interfase';
+import { IButtonProps } from '../../../models/interfase';
 import './Button.scss'
 
-export default function Button (props: ButtonProps): ButtonHTMLAttributes<HTMLButtonElement> {
+export default function Button (props: IButtonProps): ButtonHTMLAttributes<HTMLButtonElement> {
     
     const {children, onClick, className} = props;
 

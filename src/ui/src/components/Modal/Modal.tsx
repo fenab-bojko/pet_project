@@ -1,10 +1,10 @@
 import './Modal.scss'
 import Button from "../Button/Button";
-import { useState } from 'react';
-import { ModalProps } from '../../../models/interfase';
+import { useCallback, useState } from 'react';
+import { IModalProps } from '../../../models/interfase';
 
 
-export default function Modal (props: ModalProps) {
+export default function Modal (props: IModalProps) {
     const {visible, onSendQuestion} = props
    
     const [name, setName] = useState('');
@@ -12,6 +12,10 @@ export default function Modal (props: ModalProps) {
     const [topic, setTopic] = useState('html')
     const [textQuestion, setTextQuestion] = useState('')
     const [textAnswer, setTextAnswer] = useState('')
+
+    const sendQuestion: IModalProps['onSendQuestion'] = useCallback((textQuestion, topic, skill, textAnswer, name) => {
+        onSendQuestion(textQuestion, topic, skill, textAnswer, name);
+    }, [])
 
 
     return (
@@ -35,8 +39,8 @@ export default function Modal (props: ModalProps) {
                     <textarea name="textQuestion" id="modalQuestion" cols="30" rows="10" value={textQuestion} onChange={(e)=>{setTextQuestion(e.target.value)}} placeholder='Введите вопрос'>{textQuestion}</textarea>
                     <textarea name="textAnswer" id="modalAnswer" cols="30" rows="10" value={textAnswer} onChange={(e)=>{setTextAnswer(e.target.value)}} placeholder='Введите ответ'>{textAnswer}</textarea>
 
-                    <Button  className='button' onClick={()=>{onSendQuestion(textQuestion, topic, skill, textAnswer, name)}}>Отправить</Button>
-                    <Button  className='button' onClick={()=>{onSendQuestion(textQuestion, topic, skill, textAnswer)}}>Закрыть</Button>
+                    <Button  className='button' onClick={ sendQuestion }>Отправить</Button>
+                    <Button  className='button' onClick={ sendQuestion }>Закрыть</Button>
                 </form>
             </div>
         </div>
