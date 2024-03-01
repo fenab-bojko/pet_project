@@ -1,7 +1,7 @@
 import './Content.scss';
 import QuestionContainer from "../QuestionContainer/QuestionsContainer";
 import Menu from '../Menu/Menu';
-import { memo, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 
 interface IContainerProps {
     onAddQuestion: () => void
@@ -17,14 +17,13 @@ const Content = memo(function Content (props: IContainerProps) {
     const [sortQuestions, setSortQuestion] = useState('questions')
     const [skillQuestion, setSkillQuestion] = useState('junior')
 
-    const onSortQuestion: ISortQuestion['onSortQuestion'] = (type) => {
-        // console.log(type)
+    const onSortQuestion: ISortQuestion['onSortQuestion'] = useCallback((type) => {
         setSortQuestion(type);
-    }
+    }, [])
 
-    const onSkillQuestion: ISortQuestion['onSkillQuestion'] = (skill) => {
+    const onSkillQuestion: ISortQuestion['onSkillQuestion'] = useCallback((skill) => {
         setSkillQuestion(skill);
-    }
+    }, [])
 
     
     return (

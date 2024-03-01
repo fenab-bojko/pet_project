@@ -1,5 +1,5 @@
 import './Menu.scss';
-import Button from "../Button/Button";
+import { Button } from "../Button/Button";
 import { useCallback, useState } from 'react';
 
 interface IMenuProps {

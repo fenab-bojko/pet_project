@@ -19,6 +19,8 @@ export default function QuestionContainer (props: IQuestionConteinerProps) {
     const handlerClick: THandlerClick = (key) => {
         setVisible(key);
     }
+
+    // загрузка списка вопросов из backend/lib/data.js
     useEffect(() => {
         sortQuestions(type, skill).then((data: string[]) => {
             setQuestions(data);
@@ -32,7 +34,7 @@ export default function QuestionContainer (props: IQuestionConteinerProps) {
                     {questions.map(elem=>(
                         <li key={elem.id} onClick={() => handlerClick(elem.id)}>
                             <strong>{elem.question}</strong>
-                            <p className={visible === elem.id ? '' : 'hidden'}>{elem.answer}</p>
+                            {visible === elem.id ? <p>{elem.answer}</p> : null}
                         </li>   
                     ))}
                 </ul>

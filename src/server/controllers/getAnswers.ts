@@ -1,4 +1,9 @@
-import { ISetAnswer } from "../model/interface";
+interface ISetAnswer {
+    answer: string,
+    question: string,
+    language: string,
+    skill: string
+}
 
 var Answers = require('../answers/index')
 

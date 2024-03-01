@@ -1,4 +1,4 @@
-import {ButtonHTMLAttributes} from 'react';
+import { ButtonHTMLAttributes } from 'react';
 import './Button.scss'
 
 interface IButtonProps {
@@ -7,7 +7,7 @@ interface IButtonProps {
     className: string
 }
 
-export default function Button (props: IButtonProps): ButtonHTMLAttributes<HTMLButtonElement> {
+export function Button (props: IButtonProps): ButtonHTMLAttributes<HTMLButtonElement> {
     
     const {children, onClick, className} = props;
 

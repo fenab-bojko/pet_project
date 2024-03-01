@@ -1,4 +1,11 @@
-import { IClient } from "../model/interface";
+interface IClient {
+  host: string,
+  port: number,
+  database: string,
+  user: string,
+  password: string,
+  connect: () => void
+}
 
 var pg = require ('pg')
 
