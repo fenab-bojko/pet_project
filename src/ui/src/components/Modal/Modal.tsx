@@ -1,7 +1,11 @@
 import './Modal.scss'
 import Button from "../Button/Button";
 import { useCallback, useState } from 'react';
-import { IModalProps } from '../../../models/interfase';
+
+interface IModalProps {
+    visible: boolean,
+    onSendQuestion: (textQuestion: string, topic: string, skill: string, textAnswer: string, name?: string) => void
+}
 
 
 export default function Modal (props: IModalProps) {

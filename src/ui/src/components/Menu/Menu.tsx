@@ -1,8 +1,14 @@
 import './Menu.scss';
-import { IMenuProps } from '../../../models/interfase';
-import { THandleClick, TSubmenuClicked } from '../../../models/type';
 import Button from "../Button/Button";
 import { useCallback, useState } from 'react';
+
+interface IMenuProps {
+    onAddQuestion: () => void,
+    onClick: (type: string) => void,
+    onSkillQuestion: (type: string) => void
+}
+type THandleClick = (type: string) => void;
+type TSubmenuClicked = (type: string) => void;
 
 
 

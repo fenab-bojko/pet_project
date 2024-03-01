@@ -1,8 +1,12 @@
 import { useState, useEffect, HTMLAttributes } from 'react';
-import { IQuestionConteinerProps } from '../../../models/interfase';
-import { THandlerClick } from '../../../models/type';
 import './QuestionContainer.scss';
 import { sortQuestions } from '../../../backend/lib/data.js';
+
+interface IQuestionConteinerProps {
+    skill: string,
+    type: string
+}
+type THandlerClick = (key: string) => void;
 
 
 

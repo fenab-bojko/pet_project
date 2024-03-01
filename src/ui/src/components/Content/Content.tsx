@@ -1,8 +1,15 @@
 import './Content.scss';
-import { IContainerProps, ISortQuestion } from '../../../models/interfase';
 import QuestionContainer from "../QuestionContainer/QuestionsContainer";
 import Menu from '../Menu/Menu';
 import { memo, useState } from 'react';
+
+interface IContainerProps {
+    onAddQuestion: () => void
+}
+export interface ISortQuestion {
+    onSortQuestion: (type: string) => void;
+    onSkillQuestion: (skill: string) => void;
+}
 
 const Content = memo(function Content (props: IContainerProps) {
     const { onAddQuestion } = props;
