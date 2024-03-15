@@ -1,17 +1,18 @@
-import { ButtonHTMLAttributes } from 'react';
-import './Button.scss'
+import { ButtonHTMLAttributes } from "react";
+import "./Button.scss";
 
-interface IButtonProps {
-    children: string,
-    onClick:() => void,
-    className: string
+export interface IButtonProps {
+  children: string;
+  onClick: () => void;
+  className: string;
 }
 
-export function Button (props: IButtonProps): ButtonHTMLAttributes<HTMLButtonElement> {
-    
-    const {children, onClick, className} = props;
+export function Button(props: IButtonProps): ButtonHTMLAttributes<HTMLButtonElement> {
+  const { children, onClick, className } = props;
 
-    return (
-        <button className={className} onClick={onClick}>{children}</button>
-    )
+  return (
+    <button className={className} onClick={onClick}>
+      {children}
+    </button>
+  );
 }
