@@ -1,14 +1,14 @@
 import "./Content.scss";
 import { QuestionContainer } from "../QuestionContainer/QuestionsContainer";
-import { Menu } from "../Menu/Menu";
+import { Menu, TMenu } from "../Menu/Menu";
 import { memo, useCallback, useState, FC } from "react";
 import { IMenuProps } from "../Menu/Menu";
 
 export type TContainerProps = {
-  onAddQuestion: (type: string) => void;
+  onAddQuestion: TMenu["onClick"];
 };
 export interface ISortQuestion {
-  onSortQuestion: (type: string) => void;
+  onSortQuestion: IMenuProps["onAddQuestion"];
   onSkillQuestion: IMenuProps["onSkillQuestion"];
 }
 

@@ -1,12 +1,10 @@
 import "./Modal.scss";
 import { Button } from "../Button/Button";
 import { FC, useCallback, useState } from "react";
-import { strict } from "assert";
-import { TSendQuestion } from "../../App";
 
-interface IModalProps {
+export interface IModalProps {
   visible: boolean;
-  onSendQuestion: TSendQuestion;
+  onSendQuestion: (question: string, language: string, skill: string, answer: string, name: string) => void;
 }
 
 export const Modal: FC<IModalProps> = (props) => {
@@ -18,7 +16,7 @@ export const Modal: FC<IModalProps> = (props) => {
   const [textQuestion, setTextQuestion] = useState("");
   const [textAnswer, setTextAnswer] = useState("");
 
-  const sendQuestion: TSendQuestion = useCallback((textQuestion, topic, skill, textAnswer, name) => {
+  const sendQuestion: IModalProps["onSendQuestion"] = useCallback((textQuestion, topic, skill, textAnswer, name) => {
     onSendQuestion(textQuestion, topic, skill, textAnswer, name);
   }, []);
 

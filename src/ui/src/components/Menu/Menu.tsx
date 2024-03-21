@@ -1,16 +1,16 @@
 import "./Menu.scss";
 import { Button } from "../Button/Button";
 import { useCallback, useState } from "react";
-import { TContainerProps } from "../Content/Content";
 
-type TMenu = {
+export type TMenu = {
   onClick: (type: string) => void;
 };
 
 export interface IMenuProps extends TMenu {
-  onAddQuestion: TContainerProps["onAddQuestion"];
+  onAddQuestion: (type: string) => void;
   onSkillQuestion: (type: string) => void;
 }
+
 type THandleClick = (type: string) => void;
 type TSubmenuClicked = (type: string) => void;
 

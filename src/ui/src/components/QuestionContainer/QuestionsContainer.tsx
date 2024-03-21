@@ -1,13 +1,12 @@
-import { useState, useEffect, HTMLAttributes } from "react";
+import { useState, useEffect } from "react";
 import "./QuestionContainer.scss";
 import { AnswersApi, TElem } from "../../model/answer/api";
-import { Question } from "../Question/Question";
+import { Question, TQuestionProps } from "../Question/Question";
 
 interface IQuestionConteinerProps {
   skill: string;
   type: string;
 }
-export type THandlerClick = (key: number) => void;
 
 export function QuestionContainer(props: IQuestionConteinerProps) {
   const { skill, type } = props;
@@ -15,7 +14,7 @@ export function QuestionContainer(props: IQuestionConteinerProps) {
   const [visible, setVisible] = useState<number>();
   const [questions, setQuestions] = useState([]);
 
-  const handlerClick: THandlerClick = (key) => {
+  const handlerClick: TQuestionProps["handlerClick"] = (key) => {
     setVisible(key);
   };
 
