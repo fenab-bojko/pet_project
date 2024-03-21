@@ -3,7 +3,6 @@ import { Button } from "../Button/Button";
 import { FC, useCallback, useState } from "react";
 import { strict } from "assert";
 import { TSendQuestion } from "../../App";
-import { IButtonProps } from "../Button/Button";
 
 interface IModalProps {
   visible: boolean;
@@ -46,13 +45,22 @@ export const Modal: FC<IModalProps> = (props) => {
               setTopic(e.target.value);
             }}
           >
-            <option value="html">HTML</option>
-            <option value="css">CSS</option>
-            <option value="js">JavaScript</option>
-            <option value="git">Git</option>
-            <option value="php">PHP</option>
-            <option value="react">ReactJS</option>
-            <option value="algorithm">Algorithm</option>
+            {skill === "junior" && (
+              <>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="js">JavaScript</option>
+                <option value="git">Git</option>
+              </>
+            )}
+            {skill === "midle" && (
+              <>
+                <option value="git">Git</option>
+                <option value="php">PHP</option>
+                <option value="react">ReactJS</option>
+                <option value="algorithm">Algorithm</option>
+              </>
+            )}
           </select>
           <textarea
             name="textQuestion"
@@ -91,4 +99,4 @@ export const Modal: FC<IModalProps> = (props) => {
       </div>
     </div>
   );
-}
+};

@@ -1,5 +1,5 @@
 var express = require('express');
-var AnswersController = require('../controllers/getAnswers')
+var AnswersController = require('../controllers/getAnswers.ts')
 var router = express.Router();
 
 

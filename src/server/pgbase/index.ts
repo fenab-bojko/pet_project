@@ -1,15 +1,15 @@
-interface IClient {
-  host: string,
-  port: number,
-  database: string,
-  user: string,
-  password: string,
-  connect: () => void
-}
+// interface IClient {
+//   host: string,
+//   port: number,
+//   database: string,
+//   user: string,
+//   password: string,
+//   connect: () => void
+// }
 
 var pg = require ('pg')
 
-const client: IClient = new pg.Client({
+const client = new pg.Client({
   host: 'localhost',
   port: 5432,
   database: 'report',

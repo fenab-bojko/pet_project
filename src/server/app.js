@@ -6,9 +6,9 @@ var logger = require('morgan');
 var cors = require('cors');
 var bodyParser = require('body-parser');
 
-var answersRouter = require('./routes/answers');
+var answersRouter = require('./routes/answers.ts');
 
-var pgBase = require("./pgbase/index");
+var pgBase = require("./pgbase/index.ts");
 
 
 var app = express();

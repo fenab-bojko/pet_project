@@ -1,7 +1,7 @@
-type TSetAnswer = (answer: string, question: string, languege: string, skill: string) => any;
+// type TSetAnswer = (answer: string, question: string, languege: string, skill: string) => any;
 
 
-var pgBase = require("../pgbase/index")
+var pgBase = require("../pgbase/index.ts")
 
 async function getAllAnswers () {
 
