@@ -6,6 +6,16 @@ export type TElem = {
   id: number;
 };
 
+export class UserApi {
+  async fetchAdd() {
+    const url = "http://localhost:3000/users";
+    let response = await fetch(url);
+    let data = await response.json();
+    return data;
+  }
+}
+
+
 export class AnswersApi {
 
   async sortQuestions(type: string, skill: string) {
@@ -29,7 +39,8 @@ export class AnswersApi {
   }
 
   async setAnswer(question = "", language = "", skill = "", answer = "") {
-    await fetch("http://localhost:3000/answers", {
+    
+    await fetch ("http://localhost:3000/answers", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,5 +1,5 @@
 import "./Modal.scss";
-import { Button } from "../Button/Button";
+import { Button, IButtonProps } from "../Button/Button";
 import { FC, useCallback, useState } from "react";
 
 export interface IModalProps {
@@ -16,7 +16,8 @@ export const Modal: FC<IModalProps> = (props) => {
   const [textQuestion, setTextQuestion] = useState("");
   const [textAnswer, setTextAnswer] = useState("");
 
-  const sendQuestion: IModalProps["onSendQuestion"] = useCallback((textQuestion, topic, skill, textAnswer, name) => {
+  const sendQuestion: IButtonProps['onClick'] = useCallback(() => {
+    console.log('modal>>>sendQuestion');
     onSendQuestion(textQuestion, topic, skill, textAnswer, name);
   }, []);
 

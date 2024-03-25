@@ -9,16 +9,19 @@ export type TMenu = {
 export interface IMenuProps extends TMenu {
   onAddQuestion: (type: string) => void;
   onSkillQuestion: (type: string) => void;
+  authUser: (name: string) => void;
+  auth: boolean;
 }
 
 type THandleClick = (type: string) => void;
 type TSubmenuClicked = (type: string) => void;
 
 export function Menu(props: IMenuProps) {
-  const { onAddQuestion, onClick, onSkillQuestion } = props;
+  const { onAddQuestion, onClick, onSkillQuestion, authUser, auth } = props;
 
   const [active, setActive] = useState("junior");
   const [submenuAct, setSubmenuAct] = useState("questions");
+  const [nameUser, setNameUser] = useState("");
 
   const handleClick: THandleClick = useCallback((type) => {
     setActive(type);
@@ -33,13 +36,19 @@ export function Menu(props: IMenuProps) {
 
   return (
     <div className="menu-container" type={submenuAct}>
-      <form action="localhost:5173" method="post">
-        <input type="text" placeholder="Name" />
-        <input type="password" placeholder="Password" />
-        <Button type="submit" className="button">
-          Войти
-        </Button>
-      </form>
+      {!auth && (
+        <form
+          onSubmit={() => {
+            authUser(nameUser);
+          }}
+        >
+          <input type="text" placeholder="Name" onChange={(e) => setNameUser(e.target.value)} />
+          <input type="password" placeholder="Password" />
+          <Button type="submit" className="button">
+            Войти
+          </Button>
+        </form>
+      )}
       <hr></hr>
       <div className="menu">
         <Button className={"button " + (active === "junior" ? "primory" : "")} onClick={() => handleClick("junior")}>
