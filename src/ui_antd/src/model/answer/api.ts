@@ -49,24 +49,10 @@ export class UserApi {
 }
 
 export class AnswersApi {
-  async sortQuestions(type: string, skill: string) {
+  async sortQuestions() {
     const data = await this.fetchAdd();
-    const result: TQuestion[] = [];
-    if (type === "questions") {
-      data.map((elem: TQuestion) => {
-        if (elem.skill === skill) {
-          result.push(elem);
-        }
-      });
-    }
-    if (type) {
-      data.map((elem: TQuestion) => {
-        if (elem.languege === type && elem.skill === skill) {
-          result.push(elem);
-        }
-      });
-      return result;
-    }
+    
+    return data;
   }
 
   async setAnswer(question = "", language = "", skill = "", answer = "") {

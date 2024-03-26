@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { Layout, Flex } from "antd";
 import { HeaderComponent } from "./components/Header";
 import { SiderComponent } from "./components/Sider";
@@ -7,6 +7,8 @@ import { TQuestion, TUser } from "./model/answer/api";
 import { IContainerAuthUserProps } from "./components/ConteinerAuthUser";
 import { UserApi } from "./model/answer/api";
 import { IModalContentProps, ModalComponent } from "./components/Modal";
+import { AnswersApi } from "./model/answer/api";
+
 
 const layoutStyle = {
   borderRadius: 8,
@@ -22,6 +24,14 @@ export const App: FC = () => {
   const [typeModal, setTypeModal] = useState("");
   const [user, setUser] = useState<TUser>();
   const [newUser, setNewUser] = useState<TUser>();
+ 
+  const AnswersData = new AnswersApi();
+  // загрузка списка вопросов из model/answer/api.ts
+  useEffect(() => {
+    AnswersData.fetchAdd().then((data: TQuestion[]) => {
+      setQuestions(data);
+    });
+  }, []);
 
   const onAuthUser: IContainerAuthUserProps["onAuthUser"] = async (name, password) => {
     const newUserApi = new UserApi();

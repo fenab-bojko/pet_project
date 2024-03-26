@@ -7,8 +7,8 @@ var Users = require('../users/index.ts')
     }
 
     async function setUsers (req, res, next) {
-        const { name, password, skill} = req.body;
-        await Users.setUser(name, password, skill);
+        const { newUser} = req.body;
+        await Users.setUser(newUser.user_name, newUser.user_pass, newUser.user_skill);
         res.send('controllers>getUsers>setUser>ERROR');
     }
 
