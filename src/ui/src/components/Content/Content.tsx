@@ -1,16 +1,12 @@
 import "./Content.scss";
 import { QuestionContainer } from "../QuestionContainer/QuestionsContainer";
-import { Menu, TMenu } from "../Menu/Menu";
+import { Menu } from "../Menu/Menu";
 import { memo, useCallback, useState, FC } from "react";
 import { IMenuProps } from "../Menu/Menu";
 
 export type TContainerProps = {
-  onAddQuestion: TMenu["onClick"];
+  onAddQuestion: IMenuProps["onAddQuestion"];
 };
-export interface ISortQuestion {
-  onSortQuestion: IMenuProps["onAddQuestion"];
-  onSkillQuestion: IMenuProps["onSkillQuestion"];
-}
 
 const Content: FC<TContainerProps> = memo(function Content(props) {
   const { onAddQuestion } = props;
@@ -18,11 +14,11 @@ const Content: FC<TContainerProps> = memo(function Content(props) {
   const [sortQuestions, setSortQuestion] = useState("questions");
   const [skillQuestion, setSkillQuestion] = useState("junior");
 
-  const onSortQuestion: ISortQuestion["onSortQuestion"] = useCallback((type) => {
+  const onSortQuestion: IMenuProps["onClick"] = useCallback((type) => {
     setSortQuestion(type);
   }, []);
 
-  const onSkillQuestion: ISortQuestion["onSkillQuestion"] = useCallback((skill) => {
+  const onSkillQuestion: IMenuProps["onSkillQuestion"] = useCallback((skill) => {
     setSkillQuestion(skill);
   }, []);
 

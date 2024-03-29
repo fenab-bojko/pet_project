@@ -2,13 +2,12 @@ import "./Menu.scss";
 import { Button } from "../Button/Button";
 import { useCallback, useState } from "react";
 
-export type TMenu = {
-  onClick: (type: string) => void;
-};
 
-export interface IMenuProps extends TMenu {
-  onAddQuestion: (type: string) => void;
+
+export interface IMenuProps {
+  onAddQuestion: () => void;
   onSkillQuestion: (type: string) => void;
+  onClick: (type: string) => void;
 }
 
 type THandleClick = (type: string) => void;
@@ -32,11 +31,11 @@ export function Menu(props: IMenuProps) {
   }, []);
 
   return (
-    <div className="menu-container" type={submenuAct}>
+    <div className="menu-container">
       <form action="localhost:5173" method="post">
         <input type="text" placeholder="Name" />
         <input type="password" placeholder="Password" />
-        <Button type="submit" className="button">
+        <Button className="button">
           Войти
         </Button>
       </form>

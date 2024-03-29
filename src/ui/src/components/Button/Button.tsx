@@ -1,13 +1,13 @@
-import { ButtonHTMLAttributes } from "react";
+import React from "react";
 import "./Button.scss";
 
 export interface IButtonProps {
   children: string;
-  onClick: () => void;
+  onClick?: React.DOMAttributes<HTMLButtonElement>['onClick'],
   className: string;
 }
 
-export function Button(props: IButtonProps): ButtonHTMLAttributes<HTMLButtonElement> {
+export function Button(props: IButtonProps) {
   const { children, onClick, className } = props;
 
   return (
