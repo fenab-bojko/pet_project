@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Flex, Input, Tooltip, Button, ButtonProps } from "antd";
+import { Flex, Input, Tooltip, Button } from "antd";
 import { UserOutlined, InfoCircleOutlined } from "@ant-design/icons";
 
 

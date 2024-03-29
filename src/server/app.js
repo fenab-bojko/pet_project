@@ -7,6 +7,7 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 
 var answersRouter = require('./routes/answers.ts');
+var usersRouter = require('./routes/users.ts')
 
 var pgBase = require("./pgbase/index.ts");
 
@@ -24,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
 app.use('/answers', answersRouter);
-
+app.use('/users', usersRouter);
 // so bad
 pgBase.initClient();
 

@@ -8,7 +8,17 @@ interface IQuestion {
 
 export const Question: FC<IQuestion> = (props) => {
   const { question } = props;
-  console.log("Question>props>>>", question);
 
-  return <p>{question.question}</p>;
+  const items = {
+    key: question.id,
+    label: question.question,
+    children: question.answer,
+  };
+
+  return (
+    <>
+      <Divider orientation="left"></Divider>
+      <Collapse size="small" items={[items]} />
+    </>
+  );
 };

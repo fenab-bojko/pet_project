@@ -17,6 +17,7 @@ export const QuestionsList: FC = memo(() => {
         setQuestions([]);
       });
   }, []);
+
   if (questions.length === 0) return <p>LLLL</p>;
 
   return (

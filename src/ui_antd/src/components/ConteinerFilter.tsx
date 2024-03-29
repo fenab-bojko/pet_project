@@ -29,7 +29,7 @@ interface IContainerFilterProps {
 export const ConteinerFilter: FC<IContainerFilterProps> = (props) => {
   const { user } = props;
 
-  const [defaultTabs, setDefaultTabs] = useState(user ? user.user_skill : 'junior');
+  const [defaultTabs, setDefaultTabs] = useState(user ? user.user_skill : "junior");
 
   return <Tabs defaultActiveKey={defaultTabs} items={items} onChange={onChange} />;
 };
