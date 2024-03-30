@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Collapse, Divider } from "antd";
+import { Collapse, Divider, Flex } from "antd";
 import { TQuestion } from "../model/answer/api";
 
 interface IQuestion {
@@ -16,9 +16,9 @@ export const Question: FC<IQuestion> = (props) => {
   };
 
   return (
-    <>
-      <Divider orientation="left"></Divider>
+    <Flex vertical style={{paddingBottom: '5px'}}>
+      {/* <Divider orientation="left"></Divider> */}
       <Collapse size="small" items={[items]} />
-    </>
+    </Flex>
   );
 };

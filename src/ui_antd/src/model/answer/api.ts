@@ -38,26 +38,32 @@ export class UserApi {
     return resultUser;
   }
 
-  async setUser(newUser: TUser) {
-    console.log('api>UserApi>setUser>newUser>>>', newUser);
+  async setUser(name: string, pass: string, skill: string) {
     await fetch("http://localhost:3000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newUser),
+      body: JSON.stringify({
+        name: name,
+        pass: pass,
+        skill: skill
+      }),
+    })
+    .catch(() => {
+      console.log('api>setUser>catch>error');
     });
   }
 }
 
-export class AnswersApi {
+export class QuestionsApi {
   async sortQuestions() {
     const data = await this.fetchAdd();
     
     return data;
   }
 
-  async setAnswer(question = "", language = "", skill = "", answer = "") {
+  async setQuestion(question = "", language = "", skill = "junior", answer = "") {
     await fetch("http://localhost:3000/answers", {
       method: "POST",
       headers: {

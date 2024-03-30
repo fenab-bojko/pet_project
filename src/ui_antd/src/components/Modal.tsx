@@ -9,6 +9,7 @@ export interface IModalContentProps {
   onHandleCancel: () => void;
   typeModal: string;
   addNewUser: (newUser: TUser) => void;
+  addNewQuestion: (newQuestion: TQuestion) => void;
   user?: TUser;
 }
 
@@ -27,10 +28,9 @@ const modalStyle: CSSProperties = {
 };
 
 export const ModalComponent: FC<IModalContentProps> = (props) => {
-  const { isModalOpen, onHandleCancel, typeModal, user, addNewUser } = props;
+  const { isModalOpen, onHandleCancel, typeModal, user, addNewUser, addNewQuestion } = props;
 
-  const [question, setQuestion] = useState<TQuestion["question"]>("");
-  const [answer, setAnswer] = useState<TQuestion["answer"]>("");
+  const [newQuestion, setNewQuestion] = useState<TQuestion>();
   const [newUser, setNewUser] = useState<TUser>();
 
   const optionSkill = [
@@ -47,7 +47,10 @@ export const ModalComponent: FC<IModalContentProps> = (props) => {
 
   const onHandleOk: TOnHandleOk = (type) => {
     if (type === "registration") {
-      if (newUser?.user_name) addNewUser(newUser);
+      if (newUser) addNewUser(newUser);
+    }
+    if (type === 'question') {
+      if(newQuestion) addNewQuestion(newQuestion);
     }
     onHandleCancel();
   };
@@ -82,9 +85,9 @@ export const ModalComponent: FC<IModalContentProps> = (props) => {
             options={optionSkill}
             placeholder="Уровень сложности"
           />
-          <Select style={selectStyle} options={optionLanguage} placeholder="Тема вопроса" />
-          <TextArea onChange={(e) => setQuestion(e.target.value)} rows={5} placeholder="Введите вопрос" />
-          <TextArea onChange={(e) => setAnswer(e.target.value)} rows={5} placeholder="Введите ответ" />
+          <Select style={selectStyle} options={optionLanguage} placeholder="Тема вопроса" onChange={(value) => setNewQuestion({...newQuestion, languege: value})}/>
+          <TextArea onChange={(e) => setNewQuestion({...newQuestion, question: e.target.value})} rows={5} placeholder="Введите вопрос" />
+          <TextArea onChange={(e) => setNewQuestion({...newQuestion, answer: e.target.value})} rows={5} placeholder="Введите ответ" />
         </Modal>
       ) : (
         <Modal

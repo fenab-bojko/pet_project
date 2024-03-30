@@ -11,10 +11,10 @@ async function getAllAnswer() {
   }
 }
 
-async function setAnswer(answer: string, question: string, languege: string, skill: string) {
+async function setAnswer(answer, question, languege, skill) {
   try {
     const res = await pgBase.client.query(
-      `INSERT INTO public.answer (id, answer, question, "date", id_user, languege, skill, id_account) VALUES(nextval('answer_id_seq'::regclass), '${answer}', '${question}', '2024-02-13', 0, '${languege}', '${skill}', 0);`
+      `INSERT INTO public.answer (id, answer, question, "date", id_user, languege, skill, id_account) VALUES(nextval('answer_id_seq'::regclass), '${answer}', '${question}', ${new Date().toISOString}, 0, '${languege}', '${skill}', 0);`
     );
     return res.rows;
   } catch (error) {

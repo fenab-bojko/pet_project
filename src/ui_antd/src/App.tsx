@@ -3,9 +3,9 @@ import { Layout, Flex } from "antd";
 import { HeaderComponent } from "./components/Header";
 import { SiderComponent } from "./components/Sider";
 import { ContentComponent } from "./components/Content";
-import { TUser } from "./model/answer/api";
+import { TQuestion, TUser } from "./model/answer/api";
 import { IContainerAuthUserProps } from "./components/ConteinerAuthUser";
-import { UserApi } from "./model/answer/api";
+import { UserApi, QuestionsApi } from "./model/answer/api";
 import { IModalContentProps, ModalComponent } from "./components/Modal";
 
 const layoutStyle = {
@@ -16,7 +16,6 @@ const layoutStyle = {
 };
 
 export const App: FC = () => {
-  // const [questions, setQuestions] = useState<TQuestion[]>();
   const [isAuth, setIsAuth] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [typeModal, setTypeModal] = useState("");
@@ -43,14 +42,20 @@ export const App: FC = () => {
 
   const addNewUser = async (newUser: TUser) => {
     const newUserApi = new UserApi();
-    if (newUser) await newUserApi.setUser(newUser);
+    if (newUser) await newUserApi.setUser(newUser.user_name, newUser.user_pass, newUser.user_skill);
   };
+
+  const addNewQuestion = async (newQuestion: TQuestion) => {
+    const QuestionsData = new QuestionsApi();
+    if (newQuestion) await QuestionsData.setQuestion(newQuestion.question, newQuestion.languege, newQuestion.skill, newQuestion.answer)
+  }
 
   return (
     <Flex gap="middle" wrap="wrap">
       <ModalComponent
         isModalOpen={isModalOpen}
         addNewUser={addNewUser}
+        addNewQuestion={addNewQuestion}
         onHandleCancel={onHandleCancel}
         typeModal={typeModal}
         user={user}

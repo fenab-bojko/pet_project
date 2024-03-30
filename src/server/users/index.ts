@@ -4,7 +4,7 @@ var pgBase = require("../pgbase/index.ts");
 async function getAllUser() {
   try {
     const res = await pgBase.client.query(
-      "SELECT id, user_name, user_skill, user_pass, isauth, isadmin FROM public.account;"
+      "SELECT id, user_name, user_skill,'language' ,user_pass, isauth, isadmin FROM public.account;"
     );
     return res.rows;
   } catch (error) {
@@ -13,7 +13,8 @@ async function getAllUser() {
   }
 }
 
-async function setUser(name: string, pass: string, skill: string) {
+async function setUser(name, pass, skill) {
+  
   try {
     const res = await pgBase.client.query(`INSERT INTO public.account
             (id, user_name, user_skill, "language", user_pass, isauth, isadmin)

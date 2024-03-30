@@ -12,8 +12,8 @@ async function getUsers(req, res, next) {
     res.json(rows);
 }
 async function setUsers (req, res, next) {
-    const { newUser } = req.body;
-    await Users.setUser(newUser.user_name, newUser.user_pass, newUser.user_skill);
+    const { name, pass, skill} = req.body;
+    await Users.setUser(name, pass, skill);
     res.send('')
 }
 
