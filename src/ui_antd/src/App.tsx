@@ -41,8 +41,9 @@ export const App: FC = () => {
   };
 
   const addNewUser = async (newUser: TUser) => {
+    const {user_name, user_pass, user_skill} = newUser;
     const newUserApi = new UserApi();
-    if (newUser) await newUserApi.setUser(newUser.user_name, newUser.user_pass, newUser.user_skill);
+    if (newUser) await newUserApi.setUser(user_name, user_pass, user_skill);
   };
 
   const addNewQuestion = async (newQuestion: TQuestion) => {

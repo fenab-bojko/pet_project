@@ -1,20 +1,13 @@
-// interface ISetAnswer {
-//     answer: string,
-//     question: string,
-//     language: string,
-//     skill: string
-// };
-
-var Users = require('../users/index.ts')
+var Users = require("../users/index.ts");
 
 async function getUsers(req, res, next) {
-    var rows = await Users.getAllUser()
-    res.json(rows);
+  var rows = await Users.getAllUser();
+  res.json(rows);
 }
-async function setUsers (req, res, next) {
-    const { name, pass, skill} = req.body;
-    await Users.setUser(name, pass, skill);
-    res.send('')
+async function setUsers(req, res, next) {
+  const { user_name, user_pass, user_skill } = req.body;
+  await Users.setUser(user_name, user_pass, user_skill);
+  res.send("getUser>setUsers>>>OK");
 }
 
 module.exports.getUsers = getUsers;

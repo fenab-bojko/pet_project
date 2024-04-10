@@ -7,9 +7,9 @@ export type TQuestion = {
 };
 
 export type TUser = {
-  user_name?: string;
-  user_pass?: string;
-  user_skill?: string;
+  user_name: string;
+  user_pass: string;
+  user_skill: string;
   isadmin?: boolean;
   id?: number;
 };
@@ -25,7 +25,7 @@ export class UserApi {
   async authUser(name: string, password: string) {
     const users: TUser[] = await this.fetchAdd();
     const resultUser = users.filter((user) => {
-      if(!users.length) return null;
+      if (!users.length) return null;
       if (
         user.user_name.toLowerCase() === name.toLowerCase() &&
         user.user_pass.toLowerCase() === password.toLowerCase()
@@ -45,21 +45,24 @@ export class UserApi {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: name,
-        pass: pass,
-        skill: skill
+        user_name: name,
+        user_pass: pass,
+        user_skill: skill,
       }),
     })
-    .catch(() => {
-      console.log('api>setUser>catch>error');
-    });
+      .then(() => {
+        console.log("addUser");
+      })
+      .catch(() => {
+        console.log("api>setUser>catch>error");
+      });
   }
 }
 
 export class QuestionsApi {
   async sortQuestions() {
     const data = await this.fetchAdd();
-    
+
     return data;
   }
 

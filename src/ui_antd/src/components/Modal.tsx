@@ -47,10 +47,11 @@ export const ModalComponent: FC<IModalContentProps> = (props) => {
 
   const onHandleOk: TOnHandleOk = (type) => {
     if (type === "registration") {
+      console.log("Modal>onHandleOk>newUser>>>", newUser);
       if (newUser) addNewUser(newUser);
     }
-    if (type === 'question') {
-      if(newQuestion) addNewQuestion(newQuestion);
+    if (type === "question") {
+      if (newQuestion) addNewQuestion(newQuestion);
     }
     onHandleCancel();
   };
@@ -85,9 +86,22 @@ export const ModalComponent: FC<IModalContentProps> = (props) => {
             options={optionSkill}
             placeholder="Уровень сложности"
           />
-          <Select style={selectStyle} options={optionLanguage} placeholder="Тема вопроса" onChange={(value) => setNewQuestion({...newQuestion, languege: value})}/>
-          <TextArea onChange={(e) => setNewQuestion({...newQuestion, question: e.target.value})} rows={5} placeholder="Введите вопрос" />
-          <TextArea onChange={(e) => setNewQuestion({...newQuestion, answer: e.target.value})} rows={5} placeholder="Введите ответ" />
+          <Select
+            style={selectStyle}
+            options={optionLanguage}
+            placeholder="Тема вопроса"
+            onChange={(value) => setNewQuestion({ ...newQuestion, languege: value })}
+          />
+          <TextArea
+            onChange={(e) => setNewQuestion({ ...newQuestion, question: e.target.value })}
+            rows={5}
+            placeholder="Введите вопрос"
+          />
+          <TextArea
+            onChange={(e) => setNewQuestion({ ...newQuestion, answer: e.target.value })}
+            rows={5}
+            placeholder="Введите ответ"
+          />
         </Modal>
       ) : (
         <Modal
@@ -98,7 +112,7 @@ export const ModalComponent: FC<IModalContentProps> = (props) => {
           style={modalStyle}
         >
           <Input type="text" onChange={(e) => onHandleChange("name", e)} placeholder="Введите имя" />
-          <Input.Password onChange={(e) => onHandleChange("pass", e)} placeholder="Введите пароль" />
+          <Input.Password type="text" onChange={(e) => onHandleChange("pass", e)} placeholder="Введите пароль" />
           <Select
             style={selectStyle}
             onChange={(value) => onHandleChangeSelect(value)}
