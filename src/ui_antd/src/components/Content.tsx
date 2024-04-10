@@ -1,6 +1,6 @@
 import { FC, CSSProperties } from "react";
 import { Layout } from "antd";
-import { QuestionsList } from "./QuestionsList";
+import { IQuestionsList, QuestionsList } from "./QuestionsList";
 
 const { Content } = Layout;
 
@@ -11,12 +11,16 @@ const contentStyle: CSSProperties = {
   backgroundColor: "#FFF",
 };
 
-export interface IContentComponent {}
+export interface IContentComponent {
+  renderQuestions: IQuestionsList['renderQuestions'];
+  
+}
 
-export const ContentComponent: FC<IContentComponent> = () => {
+export const ContentComponent: FC<IContentComponent> = (props) => {
+  const {renderQuestions} = props;
   return (
     <Content style={contentStyle}>
-      <QuestionsList />
+      <QuestionsList renderQuestions={renderQuestions} />
     </Content>
   );
 };

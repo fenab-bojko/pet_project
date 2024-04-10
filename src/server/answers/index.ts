@@ -3,7 +3,7 @@ var pgBase = require("../pgbase/index.ts");
 
 async function getAllAnswer() {
   try {
-    const res = await pgBase.client.query("SELECT id, answer, question, languege, skill FROM public.answer");
+    const res = await pgBase.client.query(`SELECT id, answer, question, "languege", skill FROM public.answer`);
     return res.rows;
   } catch (error) {
     console.error(error);
@@ -11,10 +11,11 @@ async function getAllAnswer() {
   }
 }
 
-async function setAnswer(answer, question, languege, skill) {
+async function setAnswer(answer, question, id_user, languege, skill) {
   try {
     const res = await pgBase.client.query(
-      `INSERT INTO public.answer (id, answer, question, "date", id_user, languege, skill, id_account) VALUES(nextval('answer_id_seq'::regclass), '${answer}', '${question}', ${new Date().toISOString}, 0, '${languege}', '${skill}', 0);`
+      `INSERT INTO public.answer (id, answer, question, id_user, languege, skill, id_account) 
+      VALUES(nextval('answer_id_seq'::regclass), '${answer}', '${question}', '${id_user}', '${languege}', '${skill}', 0)`
     );
     return res.rows;
   } catch (error) {

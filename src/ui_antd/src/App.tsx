@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState } from "react";
 import { Layout, Flex } from "antd";
 import { HeaderComponent } from "./components/Header";
 import { SiderComponent } from "./components/Sider";
@@ -20,8 +20,7 @@ export const App: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [typeModal, setTypeModal] = useState("");
   const [user, setUser] = useState<TUser>();
-
-
+  const [renderQuestions, setRenderQuestions] = useState('');
 
   const onAuthUser: IContainerAuthUserProps["onAuthUser"] = async (name, password) => {
     const newUserApi = new UserApi();
@@ -41,15 +40,27 @@ export const App: FC = () => {
   };
 
   const addNewUser = async (newUser: TUser) => {
-    const {user_name, user_pass, user_skill} = newUser;
+    const { user_name, user_pass, user_skill } = newUser;
     const newUserApi = new UserApi();
     if (newUser) await newUserApi.setUser(user_name, user_pass, user_skill);
   };
 
   const addNewQuestion = async (newQuestion: TQuestion) => {
+    setRenderQuestions(newQuestion.question);
     const QuestionsData = new QuestionsApi();
-    if (newQuestion) await QuestionsData.setQuestion(newQuestion.question, newQuestion.languege, newQuestion.skill, newQuestion.answer)
-  }
+    if (newQuestion)
+    console.log(newQuestion)
+      await QuestionsData.setQuestion(
+        newQuestion.question,
+        newQuestion.languege,
+        newQuestion.skill,
+        newQuestion.answer,
+        user?.id,
+        newQuestion.id
+      );
+  };
+
+ 
 
   return (
     <Flex gap="middle" wrap="wrap">
@@ -65,8 +76,8 @@ export const App: FC = () => {
         <HeaderComponent />
         <Layout>
           <SiderComponent onAuthUser={onAuthUser} isAuth={isAuth} onShowModal={onShowModal} user={user} />
-          <ContentComponent />
-        </Layout> 
+          <ContentComponent renderQuestions={renderQuestions} />
+        </Layout>
       </Layout>
     </Flex>
   );

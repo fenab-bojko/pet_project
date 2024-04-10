@@ -93,7 +93,7 @@ export const ModalComponent: FC<IModalContentProps> = (props) => {
             onChange={(value) => setNewQuestion({ ...newQuestion, languege: value })}
           />
           <TextArea
-            onChange={(e) => setNewQuestion({ ...newQuestion, question: e.target.value })}
+            onChange={(e) => setNewQuestion({ ...newQuestion, question: e.target.value, id: new Date() })}
             rows={5}
             placeholder="Введите вопрос"
           />

@@ -4,7 +4,12 @@ import { QuestionsApi } from "../model/answer/api";
 import { Question } from "./Question";
 import { Flex } from "antd";
 
-export const QuestionsList: FC = memo(() => {
+export interface IQuestionsList {
+  renderQuestions: string;
+}
+
+export const QuestionsList: FC<IQuestionsList> = memo((props) => {
+  const { renderQuestions } = props;
   const [questions, setQuestions] = useState<TQuestion[]>([]);
 
   useEffect(() => {
@@ -17,12 +22,12 @@ export const QuestionsList: FC = memo(() => {
       .catch(() => {
         setQuestions([]);
       });
-  }, []);
+  }, [renderQuestions]);
 
   if (questions.length === 0) return <p>LLLL</p>;
-
+  
   return (
-    <Flex vertical style={{padding: '24px'}}>
+    <Flex vertical style={{ padding: "24px" }}>
       {questions.map((question) => {
         return <Question key={question.id} question={question} />;
       })}

@@ -66,17 +66,19 @@ export class QuestionsApi {
     return data;
   }
 
-  async setQuestion(question = "", language = "", skill = "junior", answer = "") {
+  async setQuestion(question: string, language: string, skill = "junior", answer: string, id_user: number, id: number) {
     await fetch("http://localhost:3000/answers", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        id_question: id,
         question: question,
         language: language,
         skill: skill,
         answer: answer,
+        id_user: id_user,
       }),
     });
   }

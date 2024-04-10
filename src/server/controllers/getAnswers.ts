@@ -14,8 +14,8 @@ async function getAnswers(req, res, next) {
     res.json(rows);
 }
 async function setAnswers (req, res, next) {
-    const { answer, question, language, skill } = req.body;
-    await Answers.setAnswer(answer, question, language, skill);
+    const { answer, question, id_user, language, skill } = req.body;
+    await Answers.setAnswer(answer, question, id_user, language, skill);
     res.send('')
 }
 
