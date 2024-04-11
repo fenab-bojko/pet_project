@@ -20,7 +20,7 @@ export const App: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [typeModal, setTypeModal] = useState("");
   const [user, setUser] = useState<TUser>();
-  const [renderQuestions, setRenderQuestions] = useState('');
+  const [renderQuestions, setRenderQuestions] = useState(0);
 
   const onAuthUser: IContainerAuthUserProps["onAuthUser"] = async (name, password) => {
     const newUserApi = new UserApi();
@@ -46,10 +46,9 @@ export const App: FC = () => {
   };
 
   const addNewQuestion = async (newQuestion: TQuestion) => {
-    setRenderQuestions(newQuestion.question);
+    onRenderQuestions();
     const QuestionsData = new QuestionsApi();
     if (newQuestion)
-    console.log(newQuestion)
       await QuestionsData.setQuestion(
         newQuestion.question,
         newQuestion.languege,
@@ -60,7 +59,9 @@ export const App: FC = () => {
       );
   };
 
- 
+  const onRenderQuestions = () => {
+    setRenderQuestions((prev) => ++prev);
+  };
 
   return (
     <Flex gap="middle" wrap="wrap">
@@ -76,7 +77,7 @@ export const App: FC = () => {
         <HeaderComponent />
         <Layout>
           <SiderComponent onAuthUser={onAuthUser} isAuth={isAuth} onShowModal={onShowModal} user={user} />
-          <ContentComponent renderQuestions={renderQuestions} />
+          <ContentComponent renderQuestions={renderQuestions} isAuth={isAuth} onRenderQuestions={onRenderQuestions} />
         </Layout>
       </Layout>
     </Flex>

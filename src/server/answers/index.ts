@@ -24,5 +24,20 @@ async function setAnswer(answer, question, id_user, languege, skill) {
   }
 }
 
+async function delAnswer(id) {
+  console.log(typeof(id));
+  try {
+    const res = await pgBase.client.query(
+      `DELETE FROM public.answer
+      WHERE id='${id}'`
+    );
+    return res.rows;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
 module.exports.getAllAnswer = getAllAnswer;
 module.exports.setAnswer = setAnswer;
+module.exports.delAnswer = delAnswer;

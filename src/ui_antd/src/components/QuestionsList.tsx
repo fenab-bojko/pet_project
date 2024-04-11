@@ -1,15 +1,18 @@
 import { FC, useState, useEffect, memo } from "react";
 import { TQuestion } from "../model/answer/api";
 import { QuestionsApi } from "../model/answer/api";
-import { Question } from "./Question";
+import { IQuestion, Question } from "./Question";
 import { Flex } from "antd";
+import { ISiderComponentProps } from "./Sider";
 
 export interface IQuestionsList {
-  renderQuestions: string;
+  renderQuestions: number;
+  isAuth: ISiderComponentProps["isAuth"];
+  onRenderQuestions: IQuestion["onRenderQuestions"];
 }
 
 export const QuestionsList: FC<IQuestionsList> = memo((props) => {
-  const { renderQuestions } = props;
+  const { renderQuestions, isAuth, onRenderQuestions } = props;
   const [questions, setQuestions] = useState<TQuestion[]>([]);
 
   useEffect(() => {
@@ -25,11 +28,11 @@ export const QuestionsList: FC<IQuestionsList> = memo((props) => {
   }, [renderQuestions]);
 
   if (questions.length === 0) return <p>LLLL</p>;
-  
+
   return (
     <Flex vertical style={{ padding: "24px" }}>
       {questions.map((question) => {
-        return <Question key={question.id} question={question} />;
+        return <Question key={question.id} question={question} isAuth={isAuth} onRenderQuestions={onRenderQuestions} />;
       })}
     </Flex>
   );

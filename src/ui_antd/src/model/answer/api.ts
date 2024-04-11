@@ -83,6 +83,12 @@ export class QuestionsApi {
     });
   }
 
+  async delQuestion(id: number) {
+    await fetch(`http://localhost:3000/answers/${id}`, {
+      method: "DELETE",
+    });
+  }
+
   async fetchAdd() {
     const url = "http://localhost:3000/answers";
     const response = await fetch(url);
