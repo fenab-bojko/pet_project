@@ -1,4 +1,4 @@
-import { FC, CSSProperties, useState, ChangeEvent } from "react";
+import { FC, CSSProperties, useState, ChangeEvent, useCallback } from "react";
 import { Modal, Select, Input } from "antd";
 import { TQuestion, TUser } from "../model/answer/api";
 
@@ -45,7 +45,7 @@ export const ModalComponent: FC<IModalContentProps> = (props) => {
     { value: "git", label: "Git" },
   ];
 
-  const onHandleOk: TOnHandleOk = (type) => {
+  const onHandleOk: TOnHandleOk = useCallback((type) => {
     if (type === "registration") {
       console.log("Modal>onHandleOk>newUser>>>", newUser);
       if (newUser) addNewUser(newUser);
@@ -54,20 +54,20 @@ export const ModalComponent: FC<IModalContentProps> = (props) => {
       if (newQuestion) addNewQuestion(newQuestion);
     }
     onHandleCancel();
-  };
+  }, [addNewQuestion, addNewUser, newQuestion, newUser, onHandleCancel]);
 
-  const onHandleChange: TOnHandleChange = (type, e) => {
+  const onHandleChange: TOnHandleChange = useCallback((type, e) => {
     if (type === "name" && typeof e !== "string") {
       setNewUser({ ...newUser, user_name: e.target.value });
     }
     if (type === "pass" && typeof e !== "string") {
       setNewUser({ ...newUser, user_pass: e.target.value });
     }
-  };
+  }, [newUser]);
 
-  const onHandleChangeSelect: TOnHandleChangeSelect = (value) => {
+  const onHandleChangeSelect: TOnHandleChangeSelect = useCallback((value) => {
     if (value) setNewUser({ ...newUser, user_skill: value });
-  };
+  }, [newUser]);
 
   return (
     <>

@@ -2,7 +2,6 @@ import { FC, useState } from "react";
 import { Flex, Input, Tooltip, Button } from "antd";
 import { UserOutlined, InfoCircleOutlined } from "@ant-design/icons";
 
-
 export interface IContainerAuthUserProps {
   onAuthUser: (name: string, password: string) => void;
   onShowModal: (typeModal: string) => void;
@@ -11,13 +10,11 @@ export interface IContainerAuthUserProps {
 export const ContainerAuthUser: FC<IContainerAuthUserProps> = (props) => {
   const { onAuthUser, onShowModal } = props;
 
-  const [name, setName] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-
-  
+  const [name, setName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   return (
-    <Flex className="siderAuthUser" vertical gap={5} align="center" style={{marginTop: '4px'}}>
+    <Flex className="siderAuthUser" vertical gap={5} align="center" style={{ marginTop: "4px" }}>
       <Input
         placeholder="Введите свое имя"
         prefix={<UserOutlined className="site-form-item-icon" />}
@@ -29,10 +26,10 @@ export const ContainerAuthUser: FC<IContainerAuthUserProps> = (props) => {
         onChange={(e) => setName(e.target.value)}
       />
       <Input.Password placeholder="Введите пароль" onChange={(e) => setPassword(e.target.value)} />
-      <Button  onClick={() => onAuthUser(name, password)} style={{ width: "100%" }} datatype="login">
+      <Button onClick={() => onAuthUser(name, password)} style={{ width: "100%" }} datatype="login">
         Вход
       </Button>
-      <Button onClick={() => onShowModal('registracion')} style={{ width: "100%" }} datatype="registration">
+      <Button onClick={() => onShowModal("registracion")} style={{ width: "100%" }} datatype="registration">
         Регистрация
       </Button>
     </Flex>

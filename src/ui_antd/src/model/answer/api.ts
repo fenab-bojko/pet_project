@@ -10,7 +10,7 @@ export type TUser = {
   user_name: string;
   user_pass: string;
   user_skill: string;
-  isadmin?: boolean;
+  isadmin: boolean;
   id?: number;
 };
 
