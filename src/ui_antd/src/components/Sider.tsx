@@ -2,8 +2,9 @@ import React, { FC } from "react";
 import { Layout, Flex, Button } from "antd";
 import { ContainerAuthUser, IContainerAuthUserProps } from "./ConteinerAuthUser";
 import { ContainerInfoUser } from "./ContainerInfoUser";
-import { ConteinerFilter } from "./ConteinerFilter";
+import { ConteinerFilter, IContainerFilterProps } from "./ConteinerFilter";
 import { TUser } from "../model/answer/api";
+import { TFilter } from "../App";
 
 const { Sider } = Layout;
 
@@ -20,10 +21,11 @@ export interface ISiderComponentProps {
   isAuth: boolean;
   onShowModal: IContainerAuthUserProps["onShowModal"];
   user?: TUser;
+  onFilterQuestion: IContainerFilterProps["onFilterQuestion"];
 }
 
 export const SiderComponent: FC<ISiderComponentProps> = (props) => {
-  const { onAuthUser, isAuth, onShowModal, user } = props;
+  const { onAuthUser, isAuth, onShowModal, user, onFilterQuestion } = props;
 
   return (
     <Sider width="25%" style={siderStyle}>
@@ -33,7 +35,7 @@ export const SiderComponent: FC<ISiderComponentProps> = (props) => {
         ) : (
           <ContainerAuthUser onAuthUser={onAuthUser} onShowModal={onShowModal} />
         )}
-        <ConteinerFilter user={user} />
+        <ConteinerFilter user={user} onFilterQuestion={onFilterQuestion} />
         {user && user.isadmin && (
           <Flex className="siderAddQuestion" vertical>
             <Button onClick={() => onShowModal("question")}>Добавить вопрос</Button>

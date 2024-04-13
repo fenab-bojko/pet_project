@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { Layout, Flex } from "antd";
 import { HeaderComponent } from "./components/Header";
 import { SiderComponent } from "./components/Sider";
@@ -7,6 +7,7 @@ import { TQuestion, TUser } from "./model/answer/api";
 import { IContainerAuthUserProps } from "./components/ConteinerAuthUser";
 import { UserApi, QuestionsApi } from "./model/answer/api";
 import { IModalContentProps, ModalComponent } from "./components/Modal";
+import { IContainerFilterProps, TFilter } from "./components/ConteinerFilter";
 
 const layoutStyle = {
   borderRadius: 8,
@@ -20,7 +21,9 @@ export const App: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [typeModal, setTypeModal] = useState("");
   const [user, setUser] = useState<TUser>();
-  const [renderQuestions, setRenderQuestions] = useState(0);
+  // const [renderQuestions, setRenderQuestions] = useState(0);
+  // const [filter, setFilter] = useState<TFilter>({ skill: "", lesson: "" });
+  const [dataFilterQuestions, setDataFilterQuestions] = useState<TQuestion[]>([]);
 
   const onAuthUser: IContainerAuthUserProps["onAuthUser"] = useCallback(async (name, password) => {
     const newUserApi = new UserApi();
@@ -45,13 +48,13 @@ export const App: FC = () => {
     if (newUser) await newUserApi.setUser(user_name, user_pass, user_skill);
   }, []);
 
-  const onRenderQuestions = useCallback(() => {
-    setRenderQuestions((prev) => ++prev);
-  }, []);
+  // const onRenderQuestions = useCallback(() => {
+  //   setRenderQuestions((prev) => ++prev);
+  // }, []);
 
   const addNewQuestion = useCallback(
     async (newQuestion: TQuestion) => {
-      onRenderQuestions();
+      // onRenderQuestions();
       const QuestionsData = new QuestionsApi();
       if (newQuestion)
         await QuestionsData.setQuestion(
@@ -63,8 +66,18 @@ export const App: FC = () => {
           newQuestion.id
         );
     },
-    [onRenderQuestions, user?.id]
+    [user?.id]
   );
+
+  const onFilterQuestion: IContainerFilterProps["onFilterQuestion"] = useCallback(async (skill) => {
+    const QuestionData = new QuestionsApi();
+    const data = await QuestionData.sortQuestions(skill);
+    if (data) setDataFilterQuestions(data);
+  }, []);
+
+  useEffect(() => {
+    onFilterQuestion("junior");
+  }, [onFilterQuestion]);
 
   return (
     <Flex gap="middle" wrap="wrap">
@@ -79,8 +92,17 @@ export const App: FC = () => {
       <Layout style={layoutStyle}>
         <HeaderComponent />
         <Layout>
-          <SiderComponent onAuthUser={onAuthUser} isAuth={isAuth} onShowModal={onShowModal} user={user} />
-          <ContentComponent renderQuestions={renderQuestions} user={user} onRenderQuestions={onRenderQuestions} />
+          <SiderComponent
+            onAuthUser={onAuthUser}
+            isAuth={isAuth}
+            onShowModal={onShowModal}
+            user={user}
+            onFilterQuestion={onFilterQuestion}
+          />
+          <ContentComponent
+            user={user}
+            dataFilterQuestions={dataFilterQuestions}
+          />
         </Layout>
       </Layout>
     </Flex>

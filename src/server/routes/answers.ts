@@ -4,6 +4,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get("/", AnswersController.getAnswers);
+router.get("/filter", AnswersController.getFilterAnswers);
 router.post("/", AnswersController.setAnswers);
 router.delete("/:id", AnswersController.delAnswers);
 

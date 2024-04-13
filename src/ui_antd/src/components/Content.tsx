@@ -1,8 +1,8 @@
 import { FC, CSSProperties } from "react";
 import { Layout } from "antd";
-import { IQuestionsList, QuestionsList } from "./QuestionsList";
+import { QuestionsList } from "./QuestionsList";
 import { IQuestion } from "./Question";
-import { TUser } from "../model/answer/api";
+import { TQuestion, TUser } from "../model/answer/api";
 
 const { Content } = Layout;
 
@@ -14,20 +14,19 @@ const contentStyle: CSSProperties = {
 };
 
 export interface IContentComponent {
-  renderQuestions: IQuestionsList["renderQuestions"];
   user?: TUser;
-  onRenderQuestions: IQuestion["onRenderQuestions"];
+  dataFilterQuestions: TQuestion[];
 }
 
 
 export const ContentComponent: FC<IContentComponent> = (props) => {
-  const { renderQuestions, user, onRenderQuestions } = props;
+  const { user, dataFilterQuestions } = props;
 
   const isAdmin = user ? user.isadmin : false;
 
   return (
     <Content style={contentStyle}>
-      <QuestionsList renderQuestions={renderQuestions} isAdmin={isAdmin} onRenderQuestions={onRenderQuestions} />
+      <QuestionsList isAdmin={isAdmin} dataFilterQuestions={dataFilterQuestions}/>
     </Content>
   );
 };

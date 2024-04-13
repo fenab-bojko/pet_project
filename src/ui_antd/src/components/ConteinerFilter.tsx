@@ -1,35 +1,41 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Tabs } from "antd";
 import type { TabsProps } from "antd";
 import { FilterJunior } from "./FilterJunior";
 import { FilterMidle } from "./FilterMidle";
 import { TUser } from "../model/answer/api";
 
-const onChange = (key: string) => {
-  console.log(key);
+export type TFilter = {
+  skill: string;
+  lesson: string;
 };
 
-const items: TabsProps["items"] = [
-  {
-    key: "junior",
-    label: "Junior",
-    children: <FilterJunior />,
-  },
-  {
-    key: "midle",
-    label: "Midle",
-    children: <FilterMidle />,
-  },
-];
-
-interface IContainerFilterProps {
+export interface IContainerFilterProps {
   user?: TUser;
+  onFilterQuestion: (skill: TFilter["skill"]) => void;
 }
 
 export const ConteinerFilter: FC<IContainerFilterProps> = (props) => {
-  const { user } = props;
+  const { user, onFilterQuestion } = props;
 
-  const [defaultTabs, setDefaultTabs] = useState(user ? user.user_skill : "junior");
+  
 
-  return <Tabs defaultActiveKey={defaultTabs} items={items} onChange={onChange} />;
+  const items: TabsProps["items"] = [
+    {
+      key: "junior",
+      label: "Junior",
+      children: <FilterJunior />,
+    },
+    {
+      key: "midle",
+      label: "Midle",
+      children: <FilterMidle />,
+    },
+  ];
+
+  const onChange = (skill: string) => {
+    onFilterQuestion(skill);
+  };
+
+  return <Tabs defaultActiveKey={user && user.user_skill} items={items} onChange={onChange} />;
 };

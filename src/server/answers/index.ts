@@ -11,6 +11,18 @@ async function getAllAnswer() {
   }
 }
 
+async function getFilterAnswer(skill) {
+  try {
+    const res = await pgBase.client.query(`SELECT id, answer, question, "languege", skill 
+                                        FROM public.answer as A
+                                        WHERE A.skill = '${skill}'`);
+    return res.rows;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
 async function setAnswer(answer, question, id_user, languege, skill) {
   try {
     const res = await pgBase.client.query(
@@ -25,7 +37,7 @@ async function setAnswer(answer, question, id_user, languege, skill) {
 }
 
 async function delAnswer(id) {
-  console.log(typeof(id));
+  console.log(typeof id);
   try {
     const res = await pgBase.client.query(
       `DELETE FROM public.answer
@@ -39,5 +51,6 @@ async function delAnswer(id) {
 }
 
 module.exports.getAllAnswer = getAllAnswer;
+module.exports.getFilterAnswer = getFilterAnswer;
 module.exports.setAnswer = setAnswer;
 module.exports.delAnswer = delAnswer;

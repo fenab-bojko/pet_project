@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback } from "react";
 import { Collapse, Flex } from "antd";
 import { QuestionsApi, TQuestion, TUser } from "../model/answer/api";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -10,7 +10,7 @@ export interface IQuestion {
 }
 
 export const Question: FC<IQuestion> = (props) => {
-  const { question, isAdmin, onRenderQuestions } = props;
+  const { question, isAdmin } = props;
 
   const items = {
     key: question.id,
@@ -21,8 +21,7 @@ export const Question: FC<IQuestion> = (props) => {
   const deleteQuestion = useCallback(() => {
     const newQuestionData = new QuestionsApi();
     newQuestionData.delQuestion(question.id);
-    onRenderQuestions();
-  }, [onRenderQuestions, question.id]);
+  }, [question.id]);
 
   return (
     <Flex vertical style={{ paddingBottom: "5px" }}>

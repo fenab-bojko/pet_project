@@ -1,3 +1,5 @@
+import { TFilter } from "../../components/ConteinerFilter";
+
 export type TQuestion = {
   question: string;
   skill: string;
@@ -60,13 +62,15 @@ export class UserApi {
 }
 
 export class QuestionsApi {
-  async sortQuestions() {
-    const data = await this.fetchAdd();
 
+  async sortQuestions(skill: TFilter['skill']) {
+    
+    const data = await this.fetchFilterAdd(skill);
+    
     return data;
   }
 
-  async setQuestion(question: string, language: string, skill = "junior", answer: string, id_user: number, id: number) {
+  async setQuestion(question: string, language: string, skill: string, answer: string, id_user: number, id: number) {
     await fetch("http://localhost:3000/answers", {
       method: "POST",
       headers: {
@@ -90,7 +94,14 @@ export class QuestionsApi {
   }
 
   async fetchAdd() {
-    const url = "http://localhost:3000/answers";
+    const url = `http://localhost:3000/answers`;
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  }
+
+  async fetchFilterAdd (skill: TFilter['skill']) {
+    const url = `http://localhost:3000/answers/filter?skill=${skill}`;
     const response = await fetch(url);
     const data = await response.json();
     return data;
