@@ -6,7 +6,6 @@ import { DeleteOutlined } from "@ant-design/icons";
 export interface IQuestion {
   question: TQuestion;
   isAdmin: TUser["isadmin"];
-  onRenderQuestions: () => void;
 }
 
 export const Question: FC<IQuestion> = (props) => {

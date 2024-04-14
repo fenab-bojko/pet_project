@@ -22,7 +22,7 @@ export const App: FC = () => {
   const [typeModal, setTypeModal] = useState("");
   const [user, setUser] = useState<TUser>();
   // const [renderQuestions, setRenderQuestions] = useState(0);
-  // const [filter, setFilter] = useState<TFilter>({ skill: "", lesson: "" });
+  const [sendFilter, setSendFilter] = useState<TFilter["lesson"]>("");
   const [dataFilterQuestions, setDataFilterQuestions] = useState<TQuestion[]>([]);
 
   const onAuthUser: IContainerAuthUserProps["onAuthUser"] = useCallback(async (name, password) => {
@@ -75,6 +75,10 @@ export const App: FC = () => {
     if (data) setDataFilterQuestions(data);
   }, []);
 
+  const onSendFilter = useCallback((lesson: TFilter["lesson"]) => {
+    setSendFilter(lesson);
+  }, []);
+
   useEffect(() => {
     onFilterQuestion("junior");
   }, [onFilterQuestion]);
@@ -98,11 +102,10 @@ export const App: FC = () => {
             onShowModal={onShowModal}
             user={user}
             onFilterQuestion={onFilterQuestion}
+            onSendFilter={onSendFilter}
+            sendFilter={sendFilter}
           />
-          <ContentComponent
-            user={user}
-            dataFilterQuestions={dataFilterQuestions}
-          />
+          <ContentComponent user={user} dataFilterQuestions={dataFilterQuestions} sendFilter={sendFilter} />
         </Layout>
       </Layout>
     </Flex>

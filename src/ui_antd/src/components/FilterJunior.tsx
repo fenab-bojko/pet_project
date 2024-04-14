@@ -1,32 +1,39 @@
-import { FC, MouseEventHandler } from "react";
+import { FC, useCallback, MouseEvent } from "react";
 import { Flex, Button } from "antd";
+import { ButtonProps } from "antd";
 import { IContainerFilterProps, TFilter } from "./ConteinerFilter";
 
-export interface IFilterProps {
-  
+export interface IFilterJuniorProps {
+  onSendFilter: IContainerFilterProps["onSendFilter"];
+  sendFilter: TFilter['lesson'];
 }
 
-export type TOnClick = (e: EventMouse) => void;
+export const FilterJunior: FC<IFilterJuniorProps> = (props) => {
+  const { onSendFilter, sendFilter } = props;
 
-export const FilterJunior: FC<IFilterProps> = () => {
   
 
-  const onClick: TOnClick = (e) => {
-    console.log(e)
-  }
-  
+  const onClick: ButtonProps["onClick"] = useCallback(
+    async (e: MouseEvent) => {
+      if (e.target.value) {
+        onSendFilter(e.target.value);
+      }
+    },
+    [onSendFilter]
+  );
+
   return (
     <Flex vertical gap={5}>
-      <Button value="html" onClick={onClick}>
+      <Button type={sendFilter === "html" ? "primary" : "default"} value="html" onClick={onClick}>
         HTML
       </Button>
-      <Button value="css" onClick={onClick}>
+      <Button type={sendFilter === "css" ? "primary" : "default"} value="css" onClick={onClick}>
         CSS
       </Button>
-      <Button value="js" onClick={onClick}>
+      <Button type={sendFilter === "js" ? "primary" : "default"} value="js" onClick={onClick}>
         JavaScript
       </Button>
-      <Button value="git" onClick={onClick}>
+      <Button type={sendFilter === "git" ? "primary" : "default"} value="git" onClick={onClick}>
         Git
       </Button>
     </Flex>

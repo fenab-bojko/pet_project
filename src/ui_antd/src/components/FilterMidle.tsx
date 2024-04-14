@@ -1,26 +1,35 @@
-import { FC } from "react";
+import { FC, useCallback, MouseEvent } from "react";
 import { Flex, Button } from "antd";
-import { IFilterProps, TOnClick } from "./FilterJunior";
+import { IFilterJuniorProps } from "./FilterJunior";
+import { ButtonProps } from "antd";
 
-export const FilterMidle: FC<IFilterProps> = () => {
-  
+interface IFilterMidleProps extends IFilterJuniorProps {}
 
-  const onClick: TOnClick = (e) => {
-    console.log(e)
-  };
+export const FilterMidle: FC<IFilterMidleProps> = (props) => {
+  const { onSendFilter, sendFilter } = props;
+
+
+  const onClick: ButtonProps["onClick"] = useCallback(
+    async (e: MouseEvent) => {
+      if (e.target.value) {
+        onSendFilter(e.target.value);
+      }
+    },
+    [onSendFilter]
+  );
 
   return (
     <Flex vertical gap={5}>
-      <Button value="git" onClick={onClick}>
+      <Button type={sendFilter === "git" ? "primary" : "default"} value="git" onClick={onClick}>
         Git
       </Button>
-      <Button value="react" onClick={onClick}>
+      <Button type={sendFilter === "react" ? "primary" : "default"} value="react" onClick={onClick}>
         ReactJS
       </Button>
-      <Button value="node" onClick={onClick}>
+      <Button type={sendFilter === "node" ? "primary" : "default"} value="node" onClick={onClick}>
         NodeJS
       </Button>
-      <Button value="vue" onClick={onClick}>
+      <Button type={sendFilter === "vue" ? "primary" : "default"} value="vue" onClick={onClick}>
         VueJS
       </Button>
     </Flex>

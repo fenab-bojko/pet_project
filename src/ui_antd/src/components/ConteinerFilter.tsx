@@ -13,27 +13,28 @@ export type TFilter = {
 export interface IContainerFilterProps {
   user?: TUser;
   onFilterQuestion: (skill: TFilter["skill"]) => void;
+  onSendFilter: (lesson: TFilter["lesson"]) => void;
+  sendFilter: TFilter['lesson'];
 }
 
 export const ConteinerFilter: FC<IContainerFilterProps> = (props) => {
-  const { user, onFilterQuestion } = props;
-
-  
+  const { user, onFilterQuestion, onSendFilter, sendFilter } = props;
 
   const items: TabsProps["items"] = [
     {
       key: "junior",
       label: "Junior",
-      children: <FilterJunior />,
+      children: <FilterJunior onSendFilter={onSendFilter} sendFilter={sendFilter}/>,
     },
     {
       key: "midle",
       label: "Midle",
-      children: <FilterMidle />,
+      children: <FilterMidle onSendFilter={onSendFilter} sendFilter={sendFilter}/>,
     },
   ];
 
   const onChange = (skill: string) => {
+    onSendFilter("");
     onFilterQuestion(skill);
   };
 
