@@ -17,17 +17,19 @@ export type TUser = {
 };
 
 export class UserApi {
-  async fetchAdd<Type>(): Promise<Type[]> {
+  async fetchAdd<Type>(): Promise<Type> {
     const url = "http://localhost:3000/users";
     const response = await fetch(url);
-    const data= await response.json();
+    const data = await response.json();
     return data;
   }
 
   async authUser(name: string, password: string) {
-    const users = await this.fetchAdd<TUser>();
+    const users = await this.fetchAdd<TUser[]>();
+
     const resultUser = users.filter((user) => {
       if (!users.length) return null;
+      
       if (
         user.user_name.toLowerCase() === name.toLowerCase() &&
         user.user_pass.toLowerCase() === password.toLowerCase()
@@ -37,11 +39,12 @@ export class UserApi {
         return null;
       }
     });
+
     return resultUser;
   }
 
   async setUser(name: string, pass: string, skill: string) {
-    await fetch("http://localhost:3000/users", {
+    const response = await fetch("http://localhost:3000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,13 +55,13 @@ export class UserApi {
         user_skill: skill,
       }),
     });
+    console.log(response.status);
   }
 }
 
 export class QuestionsApi {
   async sortQuestions(skill: TFilter["skill"]) {
-    const data = await this.fetchFilterAdd<TQuestion>(skill);
-
+    const data = await this.fetchFilterAdd<TQuestion[]>(skill);
     return data;
   }
 
@@ -76,14 +79,8 @@ export class QuestionsApi {
         answer: answer,
         id_user: id_user,
       }),
-    })
-    .then((res) => {
-      res.sendStatus(201)
-    })
-    .catch((res) => {
-      res.sendStatus(400).send('Ошибка регистрации');
-    })
-  } 
+    });
+  }
 
   async delQuestion(id: number) {
     await fetch(`http://localhost:3000/answers/${id}`, {
@@ -91,14 +88,14 @@ export class QuestionsApi {
     });
   }
 
-  async fetchAdd<Type>(): Promise<Type[]> {
+  async fetchAdd<Type>(): Promise<Type> {
     const url = `http://localhost:3000/answers`;
     const response = await fetch(url);
     const data = await response.json();
     return data;
   }
 
-  async fetchFilterAdd<Type>(skill: TFilter["skill"]): Promise<Type[]> {
+  async fetchFilterAdd<Type>(skill: TFilter["skill"]): Promise<Type> {
     const url = `http://localhost:3000/answers/filter?skill=${skill}`;
     const response = await fetch(url);
     const data = await response.json();

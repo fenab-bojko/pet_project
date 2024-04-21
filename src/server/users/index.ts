@@ -14,7 +14,6 @@ async function getAllUser() {
 }
 
 async function setUser(user_name, user_pass, user_skill) {
-  console.log('Users>index>setUser>>>', user_name, user_pass, user_skill);
   try {
     const res = await pgBase.client.query(`INSERT INTO public.account
             (id, user_name, user_skill, "language", user_pass, isauth, isadmin)
