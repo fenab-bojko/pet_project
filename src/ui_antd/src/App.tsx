@@ -21,7 +21,6 @@ export const App: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [typeModal, setTypeModal] = useState("");
   const [user, setUser] = useState<TUser>();
-  // const [renderQuestions, setRenderQuestions] = useState(0);
   const [sendFilter, setSendFilter] = useState<TFilter["lesson"]>("");
   const [dataFilterQuestions, setDataFilterQuestions] = useState<TQuestion[]>([]);
 
@@ -48,13 +47,8 @@ export const App: FC = () => {
     if (newUser) await newUserApi.setUser(user_name, user_pass, user_skill);
   }, []);
 
-  // const onRenderQuestions = useCallback(() => {
-  //   setRenderQuestions((prev) => ++prev);
-  // }, []);
-
   const addNewQuestion = useCallback(
     async (newQuestion: TQuestion) => {
-      // onRenderQuestions();
       const QuestionsData = new QuestionsApi();
       if (newQuestion)
         await QuestionsData.setQuestion(

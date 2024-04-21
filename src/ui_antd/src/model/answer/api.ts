@@ -17,15 +17,15 @@ export type TUser = {
 };
 
 export class UserApi {
-  async fetchAdd() {
+  async fetchAdd<Type>(): Promise<Type[]> {
     const url = "http://localhost:3000/users";
     const response = await fetch(url);
-    const data = await response.json();
+    const data= await response.json();
     return data;
   }
 
   async authUser(name: string, password: string) {
-    const users: TUser[] = await this.fetchAdd();
+    const users = await this.fetchAdd<TUser>();
     const resultUser = users.filter((user) => {
       if (!users.length) return null;
       if (
@@ -51,22 +51,14 @@ export class UserApi {
         user_pass: pass,
         user_skill: skill,
       }),
-    })
-      .then(() => {
-        console.log("addUser");
-      })
-      .catch(() => {
-        console.log("api>setUser>catch>error");
-      });
+    });
   }
 }
 
 export class QuestionsApi {
+  async sortQuestions(skill: TFilter["skill"]) {
+    const data = await this.fetchFilterAdd<TQuestion>(skill);
 
-  async sortQuestions(skill: TFilter['skill']) {
-    
-    const data = await this.fetchFilterAdd(skill);
-    
     return data;
   }
 
@@ -84,8 +76,14 @@ export class QuestionsApi {
         answer: answer,
         id_user: id_user,
       }),
-    });
-  }
+    })
+    .then((res) => {
+      res.sendStatus(201)
+    })
+    .catch((res) => {
+      res.sendStatus(400).send('Ошибка регистрации');
+    })
+  } 
 
   async delQuestion(id: number) {
     await fetch(`http://localhost:3000/answers/${id}`, {
@@ -93,14 +91,14 @@ export class QuestionsApi {
     });
   }
 
-  async fetchAdd() {
+  async fetchAdd<Type>(): Promise<Type[]> {
     const url = `http://localhost:3000/answers`;
     const response = await fetch(url);
     const data = await response.json();
     return data;
   }
 
-  async fetchFilterAdd (skill: TFilter['skill']) {
+  async fetchFilterAdd<Type>(skill: TFilter["skill"]): Promise<Type[]> {
     const url = `http://localhost:3000/answers/filter?skill=${skill}`;
     const response = await fetch(url);
     const data = await response.json();

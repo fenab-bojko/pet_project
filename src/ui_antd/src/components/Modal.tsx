@@ -47,7 +47,6 @@ export const ModalComponent: FC<IModalContentProps> = (props) => {
 
   const onHandleOk: TOnHandleOk = useCallback((type) => {
     if (type === "registration") {
-      console.log("Modal>onHandleOk>newUser>>>", newUser);
       if (newUser) addNewUser(newUser);
     }
     if (type === "question") {
