@@ -1,20 +1,13 @@
-import React, { FC } from "react";
+import '../index.css';
+import { FC } from "react";
 import { Layout, Flex, Button } from "antd";
 import { ContainerAuthUser, IContainerAuthUserProps } from "./ConteinerAuthUser";
 import { ContainerInfoUser } from "./ContainerInfoUser";
-import { ConteinerFilter, IContainerFilterProps } from "./ConteinerFilter";
+import { ConteinerFilter, IContainerFilterProps, TFilter } from "./ConteinerFilter";
 import { TUser } from "../model/answer/api";
-import { TFilter } from "../App";
+
 
 const { Sider } = Layout;
-
-const siderStyle: React.CSSProperties = {
-  textAlign: "center",
-  lineHeight: "120px",
-  color: "#fff",
-  backgroundColor: "#fff",
-  padding: "20px 10px",
-};
 
 export interface ISiderComponentProps {
   onAuthUser: IContainerAuthUserProps["onAuthUser"];
@@ -32,7 +25,7 @@ export const SiderComponent: FC<ISiderComponentProps> = (props) => {
   const isUserAdmin = user && user.isadmin;
 
   return (
-    <Sider width="25%" style={siderStyle}>
+    <Sider width="25%" id='siderStyleContainer'>
       <Flex justify="center" gap={40} vertical>
         {isAuth && user ? (
           <ContainerInfoUser user={user} />

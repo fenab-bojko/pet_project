@@ -1,0 +1,18 @@
+* {
+  background-color: #fff;
+}
+
+#layoutStyle {
+    border-end-start-radius: 8;
+    overflow: hidden;
+    width: calc(100% - 8px);
+    max-width: 1440px;
+};
+
+#siderStyleContainer {
+    text-align: center;
+    line-height: 120px;
+    color: #fff;
+    padding: 20px 10px;
+};
+

@@ -1,3 +1,4 @@
+import './index.css';
 import { FC, useCallback, useEffect, useState } from "react";
 import { Layout, Flex } from "antd";
 import { HeaderComponent } from "./components/Header";
@@ -8,13 +9,6 @@ import { IContainerAuthUserProps } from "./components/ConteinerAuthUser";
 import { UserApi, QuestionsApi } from "./model/answer/api";
 import { IModalContentProps, ModalComponent } from "./components/Modal";
 import { IContainerFilterProps, TFilter } from "./components/ConteinerFilter";
-
-const layoutStyle = {
-  borderRadius: 8,
-  overflow: "hidden",
-  width: "calc(100% - 8px)",
-  maxWidth: "1440px",
-};
 
 export const App: FC = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -87,7 +81,7 @@ export const App: FC = () => {
         typeModal={typeModal}
         user={user}
       />
-      <Layout style={layoutStyle}>
+      <Layout id='layoutStyle'>
         <HeaderComponent />
         <Layout>
           <SiderComponent
@@ -105,3 +99,5 @@ export const App: FC = () => {
     </Flex>
   );
 };
+
+
