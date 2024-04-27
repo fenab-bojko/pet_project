@@ -7,7 +7,7 @@
 //   connect: () => void
 // }
 
-var pg = require ('pg')
+const pg = require ('pg')
 
 const client = new pg.Client({
   host: 'localhost',

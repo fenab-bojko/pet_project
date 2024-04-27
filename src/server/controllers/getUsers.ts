@@ -1,7 +1,7 @@
-var Users = require("../users/index.ts");
+const Users = require("../users/index.ts");
 
 async function getUsers(req, res, next) {
-  var rows = await Users.getAllUser();
+  const rows = await Users.getAllUser();
   res.json(rows);
 }
 async function setUsers(req, res, next) {
@@ -10,6 +10,7 @@ async function setUsers(req, res, next) {
   try {
     res.sendStatus(201);
   } catch (error) {
+    console.error(error);
     res.sendStatus(400);
   }
 }

@@ -29,7 +29,7 @@ export class UserApi {
 
     const resultUser = users.filter((user) => {
       if (!users.length) return null;
-      
+
       if (
         user.user_name.toLowerCase() === name.toLowerCase() &&
         user.user_pass.toLowerCase() === password.toLowerCase()
@@ -44,7 +44,7 @@ export class UserApi {
   }
 
   async setUser(name: string, pass: string, skill: string) {
-    const response = await fetch("http://localhost:3000/users", {
+    await fetch("http://localhost:3000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +55,6 @@ export class UserApi {
         user_skill: skill,
       }),
     });
-    console.log(response.status);
   }
 }
 

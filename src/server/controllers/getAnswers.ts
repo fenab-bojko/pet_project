@@ -1,7 +1,7 @@
-var Answers = require("../answers/index.ts");
+const Answers = require("../answers/index.ts");
 
 async function getAnswers(req, res, next) {
-  var rows = await Answers.getAllAnswer();
+  const rows = await Answers.getAllAnswer();
   res.json(rows);
 }
 async function getFilterAnswers(req, res, next) {
